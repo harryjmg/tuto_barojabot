@@ -1,3 +1,20 @@
+// This script requires Node.js, Puppeteer, Twilio and Dotenv
+// To install Puppeteer, run: npm install puppeteer
+// To install Twilio, run: npm install twilio
+// To install Dotenv, run: npm install dotenv
+
+// To use this script, you need to create a .env file with the following variables:
+// URL_DE_CONNEXION
+// URL_DE_RESERVATION
+// IDENTIFIANT
+// MOT_DE_PASSE
+// TWILIO_ACCOUNT_SID
+// TWILIO_AUTH_TOKEN
+// TWILIO_FROM_PHONE
+// TWILIO_TO_PHONE
+
+// To run this script, run: node esclave.js
+
 const puppeteer = require('puppeteer');
 
 require('dotenv').config()
@@ -32,8 +49,9 @@ function envoyer_sms(contenu_sms) {
 }
 
 async function run () {
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
+    await page.setViewport({width: 1280, height: 1080});
 
     // 0. Donner date et heure de la vérification
     await console.log("Vérification le " + new Date().toLocaleString());
